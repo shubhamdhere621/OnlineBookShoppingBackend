@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineBookShoppingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BookTb">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookName" Type="varchar" MaxLength="60" />
+    <Property Name="Author" Type="varchar" MaxLength="60" />
+    <Property Name="BookDetail" Type="varchar" MaxLength="200" />
+    <Property Name="price" Type="int" />
+    <Property Name="BookCategory" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="CartTb">
+    <Key>
+      <PropertyRef Name="CartId" />
+    </Key>
+    <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="UID" Type="int" />
+  </EntityType>
+  <EntityType Name="OrderTb">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookId" Type="int" />
+    <Property Name="CartId" Type="int" />
+    <Property Name="payment" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_Name" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Tracking_detailsTb">
+    <Key>
+      <PropertyRef Name="Tracking_Id" />
+    </Key>
+    <Property Name="Tracking_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UID" Type="int" />
+    <Property Name="OrderId" Type="int" />
+    <Property Name="status" Type="varchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="UserTb">
+    <Key>
+      <PropertyRef Name="UID" />
+    </Key>
+    <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="First_Name" Type="varchar" MaxLength="30" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="30" />
+    <Property Name="Email_ID" Type="varchar" MaxLength="30" />
+    <Property Name="Password" Type="varchar" MaxLength="150" />
+    <Property Name="RID" Type="int" />
+  </EntityType>
+  <Association Name="FK__CartTb__UID__3D5E1FD2">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="0..1" />
+    <End Role="CartTb" Type="Self.CartTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="CartTb">
+        <PropertyRef Name="UID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderTb__BookId__403A8C7D">
+    <End Role="BookTb" Type="Self.BookTb" Multiplicity="0..1" />
+    <End Role="OrderTb" Type="Self.OrderTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookTb">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="OrderTb">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderTb__CartId__412EB0B6">
+    <End Role="CartTb" Type="Self.CartTb" Multiplicity="0..1" />
+    <End Role="OrderTb" Type="Self.OrderTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartTb">
+        <PropertyRef Name="CartId" />
+      </Principal>
+      <Dependent Role="OrderTb">
+        <PropertyRef Name="CartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tracking___Order__44FF419A">
+    <End Role="OrderTb" Type="Self.OrderTb" Multiplicity="0..1" />
+    <End Role="Tracking_detailsTb" Type="Self.Tracking_detailsTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderTb">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="Tracking_detailsTb">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tracking_de__UID__440B1D61">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="0..1" />
+    <End Role="Tracking_detailsTb" Type="Self.Tracking_detailsTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="Tracking_detailsTb">
+        <PropertyRef Name="UID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserTb__RID__38996AB5">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RID" />
+      </Principal>
+      <Dependent Role="UserTb">
+        <PropertyRef Name="RID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OnlineBookShoppingDBModelStoreContainer">
+    <EntitySet Name="BookTb" EntityType="Self.BookTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CartTb" EntityType="Self.CartTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderTb" EntityType="Self.OrderTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tracking_detailsTb" EntityType="Self.Tracking_detailsTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTb" EntityType="Self.UserTb" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CartTb__UID__3D5E1FD2" Association="Self.FK__CartTb__UID__3D5E1FD2">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="CartTb" EntitySet="CartTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderTb__BookId__403A8C7D" Association="Self.FK__OrderTb__BookId__403A8C7D">
+      <End Role="BookTb" EntitySet="BookTb" />
+      <End Role="OrderTb" EntitySet="OrderTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderTb__CartId__412EB0B6" Association="Self.FK__OrderTb__CartId__412EB0B6">
+      <End Role="CartTb" EntitySet="CartTb" />
+      <End Role="OrderTb" EntitySet="OrderTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tracking___Order__44FF419A" Association="Self.FK__Tracking___Order__44FF419A">
+      <End Role="OrderTb" EntitySet="OrderTb" />
+      <End Role="Tracking_detailsTb" EntitySet="Tracking_detailsTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tracking_de__UID__440B1D61" Association="Self.FK__Tracking_de__UID__440B1D61">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="Tracking_detailsTb" EntitySet="Tracking_detailsTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserTb__RID__38996AB5" Association="Self.FK__UserTb__RID__38996AB5">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserTb" EntitySet="UserTb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OnlineBookShoppingDBModelStoreContainer" CdmEntityContainer="onlinebookshoppingEntities">
+    <EntitySetMapping Name="BookTbs">
+      <EntityTypeMapping TypeName="OnlineBookShoppingDBModel.BookTb">
+        <MappingFragment StoreEntitySet="BookTb">
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="BookDetail" ColumnName="BookDetail" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CartTbs">
+      <EntityTypeMapping TypeName="OnlineBookShoppingDBModel.CartTb">
+        <MappingFragment StoreEntitySet="CartTb">
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderTbs">
+      <EntityTypeMapping TypeName="OnlineBookShoppingDBModel.OrderTb">
+        <MappingFragment StoreEntitySet="OrderTb">
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+          <ScalarProperty Name="payment" ColumnName="payment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="OnlineBookShoppingDBModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tracking_detailsTb">
+      <EntityTypeMapping TypeName="OnlineBookShoppingDBModel.Tracking_detailsTb">
+        <MappingFragment StoreEntitySet="Tracking_detailsTb">
+          <ScalarProperty Name="Tracking_Id" ColumnName="Tracking_Id" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTbs">
+      <EntityTypeMapping TypeName="OnlineBookShoppingDBModel.UserTb">
+        <MappingFragment StoreEntitySet="UserTb">
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RID" ColumnName="RID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
